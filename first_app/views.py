@@ -7,6 +7,8 @@ import cv2
 import pytesseract
 import os
 from pathlib import Path
+from django.http import JsonResponse
+import json
 # Create your views here.
 
 def index(request):
@@ -34,7 +36,11 @@ def upload_docs(request):
                 textFromImage = pytesseract.image_to_string(img_rgb)
                 
                 fs.delete(uploaded_file.name) # delete image immedietly
-                return HttpResponse(textFromImage)
+
+                response_data = {}
+                response_data['test'] = textFromImage
+                return HttpResponse(json.dumps(response_data), content_type="application/json")
+                # return HttpResponse(textFromImage)
         except KeyError:
             return HttpResponse("Request has no resource file attached")
     return HttpResponse('Oops something went wrong :(')
