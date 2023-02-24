@@ -31,6 +31,7 @@ def upload_docs(request):
                 currentPath = Path(__file__).resolve().parent.parent
                 filePath = os.path.join(currentPath, "media")
                 filePath = os.path.join(filePath, uploaded_file.name)
+                print(filePath)
 
                 img_cv = cv2.imread(filePath)
                 img_rgb = cv2.cvtColor(img_cv, cv2.COLOR_BGR2RGB)
