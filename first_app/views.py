@@ -23,6 +23,7 @@ def upload_docs(request):
     if request.method == 'POST':
         try:
             uploaded_file = request.FILES['file']
+            print(uploaded_file.name)
             fs = FileSystemStorage()
             if fs.exists(uploaded_file.name) == False:
                 fs.save(uploaded_file.name, uploaded_file)
